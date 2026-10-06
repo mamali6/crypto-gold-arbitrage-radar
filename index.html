@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>رادار آربیتراژ و شکارچی اسپرد | تتر، طلا و رمزارز • Spread Hunter</title>
+  <meta name="description" content="سامانه زنده و هوشمند شکار فرصت‌های آربیتراژ تتر و رمزارز بین صرافی‌های نوبیتکس، والکس، تترلند، بیت‌پین و رمزینکس به همراه حباب‌سنج طلای ۱۸ عیار و سکه.">
+  
+  <style>
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url('fonts/Vazirmatn-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url('fonts/Vazirmatn-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url('fonts/Vazirmatn-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url('fonts/Vazirmatn-Black.woff2') format('woff2');
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg-base: #06090e;
+      --bg-surface: #0c1219;
+      --bg-card: #121a24;
+      --bg-card-hover: #172331;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(16, 185, 129, 0.4);
+      
+      --accent-green: #10b981;
+      --accent-green-glow: rgba(16, 185, 129, 0.25);
+      --accent-gold: #f59e0b;
+      --accent-gold-glow: rgba(245, 158, 11, 0.25);
+      --accent-cyan: #06b6d4;
+      --accent-red: #ef4444;
+      --accent-blue: #3b82f6;
+
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.03) 0%, transparent 40%),
+        linear-gradient(180deg, #06090e 0%, #0a0f16 100%);
+      background-attachment: fixed;
+    }
+
+    /* --- APP HEADER --- */
+    header.app-header {
+      background: rgba(12, 18, 25, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 10px 16px;
+    }
+
+    .header-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(245, 158, 11, 0.15));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.12);
+      flex-shrink: 0;
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: normal;
+      background: linear-gradient(120deg, #ffffff 30%, #a7f3d0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .live-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+      animation: pulseDot 1.8s infinite;
+    }
+
+    @keyframes pulseDot {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0.4; transform: scale(0.9); }
+    }
+
+    .brand-subtitle {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    /* Reference ticker pills in header */
+    .header-ticker-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .header-ticker-strip::-webkit-scrollbar { display: none; }
+
+    .ticker-chip {
+      background: rgba(18, 26, 36, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      white-space: nowrap;
+    }
+    .ticker-chip-label { color: var(--text-muted); font-size: 10.5px; }
+    .ticker-chip-value { font-weight: 700; color: #fff; font-feature-settings: "tnum"; }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-hdr {
+      background: rgba(18, 26, 36, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-hdr:hover {
+      background: rgba(23, 35, 49, 1);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .btn-hdr.btn-active {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+    .btn-hdr-primary {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff;
+      border: none;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+    }
+    .btn-hdr-primary:hover {
+      background: linear-gradient(135deg, #10b981, #34d399);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.5);
+    }
+
+    /* --- NAV TABS --- */
+    .nav-tabs-wrapper {
+      background: rgba(8, 12, 17, 0.95);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 4px 16px;
+      position: sticky;
+      top: 59px;
+      z-index: 90;
+    }
+    .nav-tabs-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 0;
+    }
+    .nav-tabs-container::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .tab-btn.active {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+    .tab-badge {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+    .tab-btn.active .tab-badge {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    
+    .kpi-short { display: none; }
+    @media (max-width: 900px) {
+      .kpi-long { display: none !important; }
+      .kpi-short { display: inline-block !important; }
+    }
+
+    /* --- MAIN CONTENT CONTAINER --- */
+    main.main-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 18px 16px 60px 16px;
+    }
+
+    /* Tab Sections */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.25s ease forwards;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- SECTION HERO / STATS CARDS --- */
+    .stats-grid-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px 16px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .stat-hero-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .stat-hero-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent-cyan);
+    }
+    .stat-hero-card.gold-card::before { background: var(--accent-gold); }
+    .stat-hero-card.green-card::before { background: var(--accent-green); }
+
+    .stat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .stat-title {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .stat-icon {
+      font-size: 16px;
+    }
+    .stat-val-main {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      font-feature-settings: "tnum";
+    }
+    .stat-unit {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+    .stat-sub-text {
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* --- ARBITRAGE FILTERS --- */
+    .table-control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+    }
+    .filter-pills-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .filter-chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .filter-chip:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+    .filter-chip.active {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+    .table-meta-text {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* --- ARBITRAGE CARDS & TABLE --- */
+    .arb-routes-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .arb-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 80px 1.2fr 1.2fr 1fr 1fr 110px;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .arb-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    .arb-card.tier-golden {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.06) 0%, rgba(18, 26, 36, 1) 100%);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.08);
+    }
+    .arb-card.tier-profitable {
+      border-color: rgba(59, 130, 246, 0.35);
+    }
+
+    .col-asset {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .asset-icon-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+    }
+    .asset-name { font-weight: 700; font-size: 13px; color: #fff; }
+
+    .exchange-route-box {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .route-label { font-size: 10.5px; color: var(--text-dim); }
+    .route-exchange { font-weight: 600; font-size: 13px; color: #fff; }
+    .route-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: #38bdf8;
+      font-feature-settings: "tnum";
+    }
+
+    .spread-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .spread-val { font-size: 13px; font-weight: 700; font-feature-settings: "tnum"; }
+    .spread-val.green { color: var(--accent-green); }
+    .spread-val.gold { color: var(--accent-gold); }
+    .spread-val.red { color: var(--accent-red); }
+    .spread-sub { font-size: 10.5px; color: var(--text-dim); }
+
+    .profit-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .profit-val { font-size: 14px; font-weight: 800; font-feature-settings: "tnum"; }
+    .profit-val.green { color: #34d399; }
+    .profit-val.red { color: #f87171; }
+    .profit-roi { font-size: 10.5px; font-weight: 600; }
+
+    .action-box {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn-simulate {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-simulate:hover {
+      background: var(--accent-green);
+      color: #000;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+
+    /* --- TETHER RADAR CARDS --- */
+    .tether-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .tether-ex-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .tether-ex-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .tether-ex-card.best-buy {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(18, 26, 36, 1) 100%);
+    }
+    .tether-ex-card.best-sell {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(18, 26, 36, 1) 100%);
+    }
+
+    .tether-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ex-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ex-logo-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .ex-name { font-size: 14px; font-weight: 700; color: #fff; }
+
+    .tag-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+    .tag-buy-best {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+    .tag-sell-best {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+    }
+
+    .tether-price-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .price-sub-col {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .p-label { font-size: 10.5px; color: var(--text-dim); }
+    .p-val { font-size: 15px; font-weight: 800; color: #fff; font-feature-settings: "tnum"; }
+    .p-val.buy { color: #34d399; }
+    .p-val.sell { color: #38bdf8; }
+
+    .tether-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    /* --- GOLD & COIN BUBBLE CARDS --- */
+    .gold-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .gold-item-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0 !important;
+      left: auto !important;
+      width: 4px;
+      height: 100%;
+      background: var(--accent-gold);
+    }
+    .gold-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .gold-item-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+    .gold-item-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent-gold);
+    }
+
+    .coin-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .coin-name-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .coin-icon { font-size: 20px; }
+    .coin-name { font-size: 14px; font-weight: 700; color: #fff; }
+    .coin-weight { font-size: 11px; color: var(--text-dim); }
+
+    .bubble-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+    .bubble-low { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .bubble-mid { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .bubble-high { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .coin-metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .metric-col { display: flex; flex-direction: column; gap: 3px; }
+    .m-label { font-size: 10.5px; color: var(--text-dim); }
+    .m-val { font-size: 14px; font-weight: 700; color: #fff; font-feature-settings: "tnum"; }
+
+    .bubble-meter-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+    .bubble-meter-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+
+    /* --- GLOBAL PREMIUM GRID --- */
+    .premium-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .premium-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .prem-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .prem-title { font-size: 16px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
+
+    /* --- CALCULATOR MODAL & SECTION --- */
+    .calc-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 22px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    .calc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 12px;
+    }
+    .calc-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .calc-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .calc-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .calc-field label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .calc-input {
+      background: #080d13;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      direction: ltr;
+      text-align: right;
+    }
+    .calc-input:focus {
+      outline: none;
+      border-color: var(--accent-green);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    }
+    .calc-select {
+      background: #080d13;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .preset-chips-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .preset-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .preset-chip:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .calc-results-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(12, 18, 25, 0.9) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .res-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .res-val { font-weight: 800; font-feature-settings: "tnum"; }
+    .res-val.profit { font-size: 18px; color: #34d399; }
+    .res-val.loss { font-size: 18px; color: #f87171; }
+
+    /* --- FOOTER STATUS --- */
+    footer.app-footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 14px 16px;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .exchanges-status-list {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .status-dot-sm {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+    }
+
+    /* --- MOBILE RESPONSIVE TWEAKS --- */
+    @media (max-width: 900px) {
+      .header-ticker-strip { display: none; }
+      .brand-subtitle { display: none; }
+      .app-header { padding: 8px 10px !important; }
+      .header-top-row { gap: 6px !important; width: 100% !important; justify-content: space-between !important; }
+      .brand-group { gap: 6px !important; min-width: 0 !important; }
+      .brand-icon-box { width: 32px !important; height: 32px !important; font-size: 16px !important; }
+      .brand-title { font-size: 12.5px !important; white-space: nowrap; }
+      .live-status-pill { font-size: 9.5px !important; padding: 1px 5px !important; }
+      .header-controls { gap: 5px !important; flex-shrink: 0 !important; }
+      .btn-hdr-primary { display: none !important; }
+      .btn-hdr span.btn-text { display: none !important; }
+      .btn-hdr { padding: 4px 7px !important; font-size: 11px !important; border-radius: 6px !important; }
+      
+      /* Compact 3-Column KPI Hero */
+      .stats-grid-row {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
+        margin-bottom: 12px !important;
+      }
+      .stat-hero-card {
+        padding: 8px 10px !important;
+        gap: 2px !important;
+        border-radius: 8px !important;
+      }
+      .stat-header { margin-bottom: 2px; }
+      .stat-title { font-size: 10px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .stat-icon { display: none; }
+      .stat-val-main { font-size: 13px !important; }
+      .stat-unit { font-size: 9.5px !important; }
+      .stat-sub-text { font-size: 9.5px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+      /* Single-line scrollable Filter Bar */
+      .table-control-bar {
+        padding: 6px 10px !important;
+        margin-bottom: 10px !important;
+        gap: 6px !important;
+      }
+      .filter-pills-group {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scrollbar-width: none !important;
+        width: 100%;
+        padding-bottom: 2px;
+      }
+      .filter-pills-group::-webkit-scrollbar { display: none; }
+      .filter-chip {
+        padding: 4px 9px !important;
+        font-size: 11px !important;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      /* Compact Arbitrage Card */
+      .arb-card {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        padding: 10px 12px !important;
+        border-radius: 10px !important;
+      }
+      .arb-col-asset {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .arb-mobile-spread-badge {
+        display: inline-block !important;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 2px 7px;
+        border-radius: 6px;
+      }
+      .arb-mobile-spread-badge.green { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+      .arb-mobile-spread-badge.red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+      
+      .arb-routes-pair {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(0, 0, 0, 0.25);
+        border-radius: 8px;
+        padding: 8px 10px;
+        gap: 6px;
+      }
+      .route-arrow-sep {
+        font-size: 13px;
+        color: var(--text-dim);
+      }
+      .desktop-only { display: none !important; }
+
+      .card-mobile-footer {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 2px;
+      }
+      .btn-simulate {
+        padding: 4px 10px !important;
+        font-size: 11px !important;
+      }
+      .calc-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- APP HEADER -->
+  <header class="app-header">
+    <div class="header-top-row">
+      
+      <!-- Brand & Status -->
+      <div class="brand-group">
+        <div class="brand-icon-box">⚡</div>
+        <div class="brand-meta">
+          <div class="brand-title-wrap">
+            <span class="brand-title">رادار آربیتراژ و شکارچی اسپرد</span>
+            <span class="live-status-pill">
+              <span class="live-dot"></span> زنده
+            </span>
+          </div>
+          <span class="brand-subtitle">CRYPTO, TETHER & GOLD ARBITRAGE RADAR • V1.0</span>
+        </div>
+      </div>
+
+      <!-- Quick Ticker Chips -->
+      <div class="header-ticker-strip">
+        <div class="ticker-chip">
+          <span class="ticker-chip-label">میانگین تتر:</span>
+          <span class="ticker-chip-value" id="hdrUsdt">۲۶۸,۳۴۰ تومان</span>
+        </div>
+        <div class="ticker-chip">
+          <span class="ticker-chip-label">اونس طلا:</span>
+          <span class="ticker-chip-value" id="hdrOunce">۴,۱۵۷.۱۲ $</span>
+        </div>
+        <div class="ticker-chip">
+          <span class="ticker-chip-label">طلای ۱۸ عیار:</span>
+          <span class="ticker-chip-value" id="hdrGold18">۲۶,۷۳۹,۰۰۰ تومان</span>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="header-controls">
+        <button class="btn-hdr btn-active" id="sfxToggleBtn" title="آلارم صوتی فرصت‌های سودآور">
+          <span id="sfxIcon">🔊</span>
+          <span class="btn-text">آلارم صوتی</span>
+        </button>
+        <button class="btn-hdr" id="refreshBtn" title="به‌روزرسانی آنی">
+          <span>🔄</span>
+          <span id="refreshCounter">۱۰s</span>
+        </button>
+        <button class="btn-hdr btn-hdr-primary" id="openCalcQuickBtn">
+          <span>🧮</span>
+          <span>ماشین‌حساب</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="nav-tabs-wrapper">
+    <div class="nav-tabs-container">
+      <button class="tab-btn active" data-tab="tab-arbitrage">
+        <span>⚡ فرصت‌های آربیتراژ</span>
+        <span class="tab-badge" id="badgeArbCount">۰</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-tether">
+        <span>🪙 دیده‌بان تتر</span>
+        <span class="tab-badge">۵ صرافی</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-gold">
+        <span>💎 حباب‌سنج طلا و سکه</span>
+        <span class="tab-badge">۵ سکه</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-global">
+        <span>🌐 پریمیوم بازار ایران</span>
+        <span class="tab-badge">بایننس</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-calculator">
+        <span>🧮 شبیه‌ساز سود آربیتراژ</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN VIEW -->
+  <main class="main-layout">
+
+    <!-- ==================== TAB 1: ARBITRAGE ROUTES ==================== -->
+    <div class="tab-pane active" id="tab-arbitrage">
+      
+      <!-- Highlights Row -->
+      <div class="stats-grid-row">
+        <div class="stat-hero-card green-card">
+          <div class="stat-header">
+            <span class="stat-title"><span class="kpi-long">بهترین فرصت آربیتراژ شناسایی‌شده</span><span class="kpi-short">بهترین اسپرد</span></span>
+            <span class="stat-icon">🚀</span>
+          </div>
+          <div class="stat-val-main" id="heroTopArbSpread">۰.۰۰٪</div>
+          <div class="stat-sub-text" id="heroTopArbRoute">در حال پویش صرافی‌ها...</div>
+        </div>
+
+        <div class="stat-hero-card">
+          <div class="stat-header">
+            <span class="stat-title"><span class="kpi-long">سود خالص تخمینی (سرمایه ۵۰ میلیون تومان)</span><span class="kpi-short">سود خالص ۵۰M</span></span>
+            <span class="stat-icon">💰</span>
+          </div>
+          <div class="stat-val-main" id="heroTopArbProfit">۰ <span class="stat-unit">تومان</span></div>
+          <div class="stat-sub-text" id="heroTopArbRoi">بازده خالص پس از کارمزدها</div>
+        </div>
+
+        <div class="stat-hero-card gold-card">
+          <div class="stat-header">
+            <span class="stat-title"><span class="kpi-long">تعداد مسیرهای فعال</span><span class="kpi-short">مسیرهای فعال</span></span>
+            <span class="stat-icon">🔄</span>
+          </div>
+          <div class="stat-val-main" id="heroTotalRoutes">۳۲ <span class="stat-unit">مسیر</span></div>
+          <div class="stat-sub-text"><span class="kpi-long">پویش همزمان بین ۵ صرافی کشور</span><span class="kpi-short">۵ صرافی زنده</span></div>
+        </div>
+      </div>
+
+      <!-- Filters & Control Bar -->
+      <div class="table-control-bar">
+        <div class="filter-pills-group">
+          <span style="font-size: 11.5px; color: var(--text-dim);">فیلتر دارایی:</span>
+          <button class="filter-chip active" data-filter-asset="ALL">همه</button>
+          <button class="filter-chip" data-filter-asset="USDT">تتر (USDT)</button>
+          <button class="filter-chip" data-filter-asset="BTC">بیت‌کوین (BTC)</button>
+          <button class="filter-chip" data-filter-asset="ETH">اتریوم (ETH)</button>
+        </div>
+        <div class="filter-pills-group">
+          <span style="font-size: 11.5px; color: var(--text-dim);">نوع سود:</span>
+          <button class="filter-chip active" data-filter-tier="ALL">تمام مسیرها</button>
+          <button class="filter-chip" data-filter-tier="PROFITABLE">فقط سودآورها ⚡</button>
+        </div>
+      </div>
+
+      <!-- Routes Grid / Table -->
+      <div class="arb-routes-grid" id="arbRoutesContainer">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 2: TETHER BOARD ==================== -->
+    <div class="tab-pane" id="tab-tether">
+      
+      <div class="table-control-bar">
+        <span class="table-meta-text">💡 بهترین استراتژی خرید و فروش تتر (USDT) در لحظه کنونی:</span>
+        <span style="font-size: 11.5px; color: var(--accent-green); font-weight: 700;" id="tetherBestSummary"></span>
+      </div>
+
+      <!-- Tether Exchange Cards -->
+      <div class="tether-cards-grid" id="tetherCardsContainer">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 3: GOLD & COIN BUBBLE ==================== -->
+    <div class="tab-pane" id="tab-gold">
+      
+      <div class="table-control-bar">
+        <span class="table-meta-text">📐 فرمول ارزش ذاتی سکه = (اونس طلا × نرخ تتر × وزن × ۰.۹۰۰ ÷ ۳۱.۱۰۳۵) + حق ضرب</span>
+        <span style="font-size: 11.5px; color: var(--accent-gold); font-weight: 600;">نرخ مبنای تتر: <b id="goldRefUsdt">--</b> تومان</span>
+      </div>
+
+      <!-- Gold & Coins Grid -->
+      <div class="gold-cards-grid" id="goldCardsContainer">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Gold 18k In-depth Box -->
+      <div class="stat-hero-card" style="margin-top: 10px;">
+        <div class="stat-header">
+          <span class="stat-title">وضعیت طلای ۱۸ عیار بازار در مقایسه با ارزش ذاتی انس جهانی</span>
+          <span class="stat-icon">⚖️</span>
+        </div>
+        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 8px;">
+          <div>
+            <span style="font-size: 11px; color: var(--text-dim);">قیمت بازار هر گرم ۱۸ عیار:</span>
+            <div style="font-size: 16px; font-weight: 800; color: #fff;" id="gold18MarketVal">--</div>
+          </div>
+          <div>
+            <span style="font-size: 11px; color: var(--text-dim);">ارزش ذاتی طلای ۱۸ عیار (انس × تتر):</span>
+            <div style="font-size: 16px; font-weight: 800; color: #38bdf8;" id="gold18IntrinsicVal">--</div>
+          </div>
+          <div>
+            <span style="font-size: 11px; color: var(--text-dim);">اختلاف و حباب طلا:</span>
+            <div style="font-size: 16px; font-weight: 800;" id="gold18BubbleVal">--</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 4: GLOBAL PREMIUM ==================== -->
+    <div class="tab-pane" id="tab-global">
+      
+      <div class="table-control-bar">
+        <span class="table-meta-text">🌍 مقایسه قیمت لحظه‌ای ارزهای دیجیتال در ایران با قیمت مرجع صرافی بایننس (Binance):</span>
+      </div>
+
+      <div class="premium-grid" id="globalPremiumContainer">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 5: CALCULATOR ==================== -->
+    <div class="tab-pane" id="tab-calculator">
+      
+      <div class="calc-container">
+        <div class="calc-header">
+          <div class="calc-title">
+            <span>🧮</span>
+            <span>ماشین‌حساب هوشمند سود و بازدهی آربیتراژ (Arbitrage ROI)</span>
+          </div>
+          <span style="font-size: 11px; color: var(--text-dim);">کسر خودکار کارمزد معامله و انتقال</span>
+        </div>
+
+        <div class="calc-row">
+          <div class="calc-field">
+            <label>سرمایه اولیه ورود (تومان):</label>
+            <input type="number" class="calc-input" id="calcCapitalInput" value="50000000" step="5000000">
+            <div class="preset-chips-row">
+              <span class="preset-chip" onclick="setCalcCapital(10000000)">۱۰ میلیون</span>
+              <span class="preset-chip" onclick="setCalcCapital(50000000)">۵۰ میلیون</span>
+              <span class="preset-chip" onclick="setCalcCapital(100000000)">۱۰۰ میلیون</span>
+              <span class="preset-chip" onclick="setCalcCapital(250000000)">۲۵۰ میلیون</span>
+            </div>
+          </div>
+
+          <div class="calc-field">
+            <label>ارز مورد نظر:</label>
+            <select class="calc-select" id="calcAssetSelect">
+              <option value="USDT">تتر (USDT)</option>
+              <option value="BTC">بیت‌کوین (BTC)</option>
+              <option value="ETH">اتریوم (ETH)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc-row">
+          <div class="calc-field">
+            <label>صرافی مبدا (خرید):</label>
+            <select class="calc-select" id="calcBuyExchangeSelect"></select>
+          </div>
+
+          <div class="calc-field">
+            <label>صرافی مقصد (فروش):</label>
+            <select class="calc-select" id="calcSellExchangeSelect"></select>
+          </div>
+        </div>
+
+        <div class="calc-results-box" id="calcResultBox">
+          <div class="res-row">
+            <span style="color: var(--text-muted);">قیمت خرید در صرافی مبدا:</span>
+            <span class="res-val" id="calcResBuyPrice">--</span>
+          </div>
+          <div class="res-row">
+            <span style="color: var(--text-muted);">قیمت فروش در صرافی مقصد:</span>
+            <span class="res-val" id="calcResSellPrice">--</span>
+          </div>
+          <div class="res-row">
+            <span style="color: var(--text-muted);">کارمزدهای تخمینی (معامله + شبکه):</span>
+            <span class="res-val" id="calcResTotalFees" style="color: #f87171;">--</span>
+          </div>
+          <div style="height: 1px; background: rgba(255, 255, 255, 0.1); margin: 4px 0;"></div>
+          <div class="res-row">
+            <span style="font-size: 15px; font-weight: 700; color: #fff;">مبلغ نهایی دریافتی:</span>
+            <span class="res-val" id="calcResFinalAmount" style="font-size: 16px;">--</span>
+          </div>
+          <div class="res-row">
+            <span style="font-size: 15px; font-weight: 700; color: #fff;">سود خالص (Net Profit):</span>
+            <span class="res-val profit" id="calcResNetProfit">--</span>
+          </div>
+          <div class="res-row">
+            <span style="color: var(--text-dim); font-size: 11px;">درصد بازدهی نهایی (ROI):</span>
+            <span class="res-val" id="calcResNetRoi" style="font-size: 13px;">--</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- APP FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div class="exchanges-status-list" id="footerExchangesStatus">
+        <span style="font-size: 11px; color: var(--text-dim);">وضعیت صرافی‌ها:</span>
+        <!-- Rendered via JS -->
+      </div>
+      <div style="font-size: 11px; color: var(--text-dim);">
+        آخرین به‌روزرسانی: <span id="lastUpdatedClockFa" style="color: #fff; font-weight: 700;">--:--:--</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --- STATE MANAGEMENT ---
+    let appData = null;
+    let sfxEnabled = true;
+    let countdown = 10;
+    let countdownTimer = null;
+    let activeAssetFilter = 'ALL';
+    let activeTierFilter = 'ALL';
+    let audioCtx = null;
+
+    // --- AUDIO CHIME (Web Audio API) ---
+    function playChimeSound() {
+      if (!sfxEnabled) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        
+        // Cha-ching melodic frequency rise (1200Hz -> 1800Hz)
+        const now = audioCtx.currentTime;
+        osc.frequency.setValueAtTime(1200, now);
+        osc.frequency.exponentialRampToValueAtTime(1800, now + 0.12);
+        
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start(now);
+        osc.stop(now + 0.36);
+      } catch (e) {
+        console.warn("Audio chime error:", e);
+      }
+    }
+
+    // --- TAB SWITCHING ---
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-tab');
+        const pane = document.getElementById(target);
+        if (pane) pane.classList.add('active');
+      });
+    });
+
+    document.getElementById('openCalcQuickBtn').addEventListener('click', () => {
+      const calcTabBtn = document.querySelector('[data-tab="tab-calculator"]');
+      if (calcTabBtn) calcTabBtn.click();
+    });
+
+    // --- SOUND TOGGLE ---
+    const sfxBtn = document.getElementById('sfxToggleBtn');
+    sfxBtn.addEventListener('click', () => {
+      sfxEnabled = !sfxEnabled;
+      sfxBtn.classList.toggle('btn-active', sfxEnabled);
+      document.getElementById('sfxIcon').textContent = sfxEnabled ? '🔊' : '🔇';
+    });
+
+    // --- FILTERS ---
+    document.querySelectorAll('[data-filter-asset]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('[data-filter-asset]').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeAssetFilter = chip.getAttribute('data-filter-asset');
+        renderArbitrageRoutes();
+      });
+    });
+
+    document.querySelectorAll('[data-filter-tier]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('[data-filter-tier]').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeTierFilter = chip.getAttribute('data-filter-tier');
+        renderArbitrageRoutes();
+      });
+    });
+
+    // --- DATA FETCHER ---
+    async function fetchSummary() {
+      try {
+        const resp = await fetch('api/summary');
+        if (!resp.ok) throw new Error("HTTP error " + resp.status);
+        const data = await resp.json();
+        
+        const hadGoldenBefore = appData && appData.arbitrage_routes && appData.arbitrage_routes.some(r => r.tier === 'golden');
+        const hasGoldenNow = data.arbitrage_routes && data.arbitrage_routes.some(r => r.tier === 'golden');
+        if (hasGoldenNow && !hadGoldenBefore) {
+          playChimeSound();
+        }
+
+        appData = data;
+        renderAll();
+      } catch (err) {
+        console.error("Fetch summary failed:", err);
+      }
+    }
+
+    // --- RENDER FUNCTIONS ---
+    function renderAll() {
+      if (!appData) return;
+
+      // 1. Header Tickers
+      if (appData.reference_usdt) {
+        document.getElementById('hdrUsdt').textContent = Number(appData.reference_usdt).toLocaleString('fa-IR') + ' تومان';
+      }
+      if (appData.ounce_gold_usd) {
+        document.getElementById('hdrOunce').textContent = Number(appData.ounce_gold_usd).toLocaleString('en-US', {maximumFractionDigits: 2}) + ' $';
+      }
+      if (appData.gold18_market) {
+        document.getElementById('hdrGold18').textContent = Number(appData.gold18_market).toLocaleString('fa-IR') + ' تومان';
+      }
+      if (appData.last_updated_fa) {
+        document.getElementById('lastUpdatedClockFa').textContent = appData.last_updated_fa;
+      }
+
+      // 2. Tab Arbitrage
+      renderArbitrageRoutes();
+
+      // 3. Tab Tether
+      renderTetherBoard();
+
+      // 4. Tab Gold
+      renderGoldBubbles();
+
+      // 5. Tab Global
+      renderGlobalPremium();
+
+      // 6. Update Calculator Selects
+      updateCalculatorOptions();
+
+      // 7. Footer Status
+      renderFooterStatus();
+    }
+
+    function renderArbitrageRoutes() {
+      const routes = appData.arbitrage_routes || [];
+      const container = document.getElementById('arbRoutesContainer');
+      document.getElementById('badgeArbCount').textContent = routes.length.toLocaleString('fa-IR');
+      document.getElementById('heroTotalRoutes').innerHTML = routes.length.toLocaleString('fa-IR') + ' <span class="stat-unit">مسیر</span>';
+
+      if (routes.length > 0) {
+        const top = routes[0];
+        document.getElementById('heroTopArbSpread').textContent = (top.gross_spread_pct > 0 ? '+' : '') + top.gross_spread_pct + '٪';
+        document.getElementById('heroTopArbSpread').style.color = top.gross_spread_pct > 0 ? 'var(--accent-green)' : 'var(--text-muted)';
+        if (window.innerWidth <= 900) {
+          document.getElementById('heroTopArbRoute').textContent = top.asset + ': ' + top.buy_exchange + ' ➔ ' + top.sell_exchange;
+        } else {
+          document.getElementById('heroTopArbRoute').textContent = top.asset + ' | خرید از ' + top.buy_exchange + ' ➔ فروش در ' + top.sell_exchange;
+        }
+        
+        const sign = top.net_profit_50m > 0 ? '+' : '';
+        document.getElementById('heroTopArbProfit').innerHTML = sign + Number(top.net_profit_50m).toLocaleString('fa-IR') + ' <span class="stat-unit">تومان</span>';
+        document.getElementById('heroTopArbProfit').style.color = top.net_profit_50m > 0 ? '#34d399' : '#f87171';
+        document.getElementById('heroTopArbRoi').textContent = 'بازدهی خالص: ' + (top.net_roi_pct > 0 ? '+' : '') + top.net_roi_pct + '٪';
+      }
+
+      // Filter routes
+      let filtered = routes;
+      if (activeAssetFilter !== 'ALL') {
+        filtered = filtered.filter(r => r.asset === activeAssetFilter);
+      }
+      if (activeTierFilter === 'PROFITABLE') {
+        filtered = filtered.filter(r => r.tier === 'golden' || r.tier === 'profitable');
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <div style="font-size: 32px; margin-bottom: 8px;">🔍</div>
+            <div style="font-size: 14px; font-weight: 700; color: #fff;">هیچ مسیری با فیلترهای انتخابی یافت نشد</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">فیلترها را روی حالت «همه» قرار دهید.</div>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      filtered.forEach((r, idx) => {
+        const isGolden = r.tier === 'golden';
+        const isProfitable = r.tier === 'profitable';
+        const cardClass = isGolden ? 'tier-golden' : (isProfitable ? 'tier-profitable' : '');
+        
+        const spreadColor = r.gross_spread > 0 ? 'green' : 'red';
+        const profitColor = r.net_profit_50m > 0 ? 'green' : 'red';
+        const assetIcon = r.asset === 'USDT' ? '💵' : (r.asset === 'BTC' ? '₿' : 'Ξ');
+
+        html += `
+          <div class="arb-card ${cardClass}">
+            
+            <div class="arb-col-asset">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div class="asset-icon-badge">${assetIcon}</div>
+                <span class="asset-name">${r.asset}</span>
+              </div>
+              <span class="arb-mobile-spread-badge ${spreadColor}" style="display: none;">
+                اسپرد: ${r.gross_spread_pct > 0 ? '+' : ''}${r.gross_spread_pct}٪
+              </span>
+            </div>
+
+            <div class="arb-routes-pair" style="display: contents;">
+              <div class="exchange-route-box">
+                <span class="route-label">خرید ارزان‌تر:</span>
+                <span class="route-exchange">${r.buy_exchange}</span>
+                <span class="route-price">${Number(r.buy_price).toLocaleString('fa-IR')} ت</span>
+              </div>
+
+              <div class="exchange-route-box">
+                <span class="route-label">فروش گران‌تر:</span>
+                <span class="route-exchange">${r.sell_exchange}</span>
+                <span class="route-price">${Number(r.sell_price).toLocaleString('fa-IR')} ت</span>
+              </div>
+            </div>
+
+            <div class="spread-box desktop-only">
+              <span class="route-label">اسپرد ناخالص:</span>
+              <span class="spread-val ${spreadColor}">${r.gross_spread_pct > 0 ? '+' : ''}${r.gross_spread_pct}٪</span>
+              <span class="spread-sub">${(r.gross_spread > 0 ? '+' : '') + Number(r.gross_spread).toLocaleString('fa-IR')} ت/واحد</span>
+            </div>
+
+            <div class="card-mobile-footer" style="display: contents;">
+              <div class="profit-box">
+                <span class="route-label">سود خالص (۵۰M ت):</span>
+                <span class="profit-val ${profitColor}">${r.net_profit_50m > 0 ? '+' : ''}${Number(r.net_profit_50m).toLocaleString('fa-IR')} ت</span>
+                <span class="profit-roi" style="color: ${r.net_roi_pct > 0 ? '#34d399' : '#f87171'}">${r.net_roi_pct > 0 ? '+' : ''}${r.net_roi_pct}٪ ROI</span>
+              </div>
+
+              <div class="action-box">
+                <button class="btn-simulate" onclick="populateCalculator('${r.asset}', '${r.buy_slug}', '${r.sell_slug}')">
+                  🧮 شبیه‌ساز
+                </button>
+              </div>
+            </div>
+
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderTetherBoard() {
+      const boards = appData.tether_boards || [];
+      const container = document.getElementById('tetherCardsContainer');
+      const bestBuy = appData.best_buy_usdt;
+      const bestSell = appData.best_sell_usdt;
+
+      if (bestBuy && bestSell) {
+        document.getElementById('tetherBestSummary').textContent = 
+          `خرید از ${bestBuy.exchange} (${Number(bestBuy.ask).toLocaleString('fa-IR')} ت) ➔ فروش در ${bestSell.exchange} (${Number(bestSell.bid).toLocaleString('fa-IR')} ت)`;
+      }
+
+      let html = '';
+      boards.forEach(b => {
+        const isBestBuy = bestBuy && bestBuy.slug === b.slug;
+        const isBestSell = bestSell && bestSell.slug === b.slug;
+        const cardClass = isBestBuy ? 'best-buy' : (isBestSell ? 'best-sell' : '');
+
+        let tagHtml = '';
+        if (isBestBuy) tagHtml = '<span class="tag-badge tag-buy-best">⚡ ارزان‌ترین برای خرید</span>';
+        else if (isBestSell) tagHtml = '<span class="tag-badge tag-sell-best">🔥 بهترین برای فروش</span>';
+
+        html += `
+          <div class="tether-ex-card ${cardClass}">
+            <div class="tether-card-header">
+              <div class="ex-name-wrap">
+                <div class="ex-logo-badge">🏛️</div>
+                <span class="ex-name">${b.exchange}</span>
+              </div>
+              ${tagHtml}
+            </div>
+
+            <div class="tether-price-row">
+              <div class="price-sub-col">
+                <span class="p-label">قیمت خرید شما (Ask):</span>
+                <span class="p-val buy">${b.ask ? Number(b.ask).toLocaleString('fa-IR') : '--'} <span style="font-size: 11px; color: var(--text-dim);">تومان</span></span>
+              </div>
+              <div class="price-sub-col" style="text-align: left;">
+                <span class="p-label">قیمت فروش شما (Bid):</span>
+                <span class="p-val sell">${b.bid ? Number(b.bid).toLocaleString('fa-IR') : '--'} <span style="font-size: 11px; color: var(--text-dim);">تومان</span></span>
+              </div>
+            </div>
+
+            <div class="tether-card-footer">
+              <span>کارمزد معامله: ${b.fee_pct}٪</span>
+              <span>اسپرد صرافی: ${b.ask && b.bid ? Number(b.ask - b.bid).toLocaleString('fa-IR') + ' ت' : '--'}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderGoldBubbles() {
+      const bubbles = appData.gold_bubbles || [];
+      const container = document.getElementById('goldCardsContainer');
+      if (appData.reference_usdt) {
+        document.getElementById('goldRefUsdt').textContent = Number(appData.reference_usdt).toLocaleString('fa-IR');
+      }
+
+      // 18k detail
+      if (appData.gold18_market) {
+        document.getElementById('gold18MarketVal').textContent = Number(appData.gold18_market).toLocaleString('fa-IR') + ' تومان';
+      }
+      if (appData.gold_18k_gram_intrinsic) {
+        document.getElementById('gold18IntrinsicVal').textContent = Number(appData.gold_18k_gram_intrinsic).toLocaleString('fa-IR') + ' تومان';
+      }
+      if (appData.gold18_bubble_pct !== undefined) {
+        const sign = appData.gold18_bubble_pct > 0 ? '+' : '';
+        const el = document.getElementById('gold18BubbleVal');
+        el.textContent = sign + appData.gold18_bubble_pct + '٪ حباب';
+        el.style.color = appData.gold18_bubble_pct > 0 ? 'var(--accent-gold)' : 'var(--accent-green)';
+      }
+
+      let html = '';
+      bubbles.forEach(c => {
+        let riskClass = 'bubble-low';
+        let barColor = 'var(--accent-green)';
+        if (c.risk === 'high') { riskClass = 'bubble-high'; barColor = 'var(--accent-red)'; }
+        else if (c.risk === 'medium') { riskClass = 'bubble-mid'; barColor = 'var(--accent-gold)'; }
+
+        const barWidth = Math.min(100, Math.max(5, c.bubble_pct * 3.5));
+
+        html += `
+          <div class="gold-item-card">
+            <div class="coin-title-row">
+              <div class="coin-name-group">
+                <span class="coin-icon">${c.icon}</span>
+                <div>
+                  <div class="coin-name">${c.name}</div>
+                  <div class="coin-weight">وزن طلا: ${c.weight_grams} گرم (عیار ۹۰۰)</div>
+                </div>
+              </div>
+              <span class="bubble-badge ${riskClass}">${c.bubble_pct}٪ حباب</span>
+            </div>
+
+            <div class="coin-metrics-grid">
+              <div class="metric-col">
+                <span class="m-label">قیمت در بازار آزاد:</span>
+                <span class="m-val">${Number(c.market_price).toLocaleString('fa-IR')} ت</span>
+              </div>
+              <div class="metric-col" style="text-align: left;">
+                <span class="m-label">ارزش ذاتی طلای سکه:</span>
+                <span class="m-val" style="color: #38bdf8;">${Number(c.intrinsic_val).toLocaleString('fa-IR')} ت</span>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+                <span style="color: var(--text-dim);">مبلغ حباب نقدی:</span>
+                <span style="font-weight: 700; color: #fff;">${Number(c.bubble_toman).toLocaleString('fa-IR')} تومان</span>
+              </div>
+              <div class="bubble-meter-bar">
+                <div class="bubble-meter-fill" style="width: ${barWidth}%; background: ${barColor};"></div>
+              </div>
+            </div>
+
+            <div style="font-size: 11px; color: var(--text-dim); display: flex; justify-content: space-between;">
+              <span>وضعیت ریسک: ${c.risk_label}</span>
+              <span>تغییر روزانه: ${c.change}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderGlobalPremium() {
+      const list = appData.global_premium || [];
+      const container = document.getElementById('globalPremiumContainer');
+
+      let html = '';
+      list.forEach(p => {
+        const isPremium = p.state === 'premium';
+        const isDiscount = p.state === 'discount';
+        const badgeColor = isPremium ? '#34d399' : (isDiscount ? '#38bdf8' : '#94a3b8');
+
+        html += `
+          <div class="premium-card">
+            <div class="prem-header">
+              <span class="prem-title">
+                <span>${p.crypto === 'BTC' ? '₿' : 'Ξ'}</span>
+                <span>${p.crypto} (ایران vs بایننس)</span>
+              </span>
+              <span style="font-size: 11.5px; font-weight: 700; color: ${badgeColor};">${p.state_label}</span>
+            </div>
+
+            <div class="coin-metrics-grid" style="grid-template-columns: 1fr 1fr;">
+              <div class="metric-col">
+                <span class="m-label">قیمت جهانی (Binance):</span>
+                <span class="m-val" style="color: #fbbf24;">${Number(p.binance_usd).toLocaleString('en-US', {maximumFractionDigits: 2})} $</span>
+              </div>
+              <div class="metric-col" style="text-align: left;">
+                <span class="m-label">قیمت میانگین در ایران:</span>
+                <span class="m-val">${Number(p.actual_iran_toman).toLocaleString('fa-IR')} ت</span>
+              </div>
+            </div>
+
+            <div class="coin-metrics-grid" style="grid-template-columns: 1fr 1fr;">
+              <div class="metric-col">
+                <span class="m-label">ارزش منصفانه تومانی (با نرخ تتر):</span>
+                <span class="m-val" style="color: #38bdf8;">${Number(p.fair_iran_toman).toLocaleString('fa-IR')} ت</span>
+              </div>
+              <div class="metric-col" style="text-align: left;">
+                <span class="m-label">اختلاف قیمت تومانی:</span>
+                <span class="m-val" style="color: ${p.diff_toman > 0 ? '#34d399' : '#f87171'};">${(p.diff_toman > 0 ? '+' : '') + Number(p.diff_toman).toLocaleString('fa-IR')} ت</span>
+              </div>
+            </div>
+
+            <div style="font-size: 11.5px; color: var(--text-dim); line-height: 1.6;">
+              ${isPremium ? '⚠️ معامله‌گران در ایران این ارز را با پریمیوم گران‌تر از نرخ واقعی دلار خریداری می‌کنند.' : (isDiscount ? '💎 این ارز در ایران زیر قیمت دلاری جهانی معامله می‌شود و فرصت خرید ارزنده است.' : '⚖️ نرخ این ارز در تعادل کامل با قیمت دلاری بایننس قرار دارد.')}
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderFooterStatus() {
+      const statuses = appData.exchanges_status || [];
+      const container = document.getElementById('footerExchangesStatus');
+      let html = '<span style="font-size: 11px; color: var(--text-dim); margin-left: 6px;">اتصال صرافی‌ها:</span>';
+      statuses.forEach(s => {
+        html += `
+          <div class="status-badge">
+            <span class="status-dot-sm" style="background: ${s.status === 'online' ? 'var(--accent-green)' : 'var(--accent-red)'}"></span>
+            <span>${s.exchange}</span>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    // --- CALCULATOR LOGIC ---
+    function updateCalculatorOptions() {
+      const routes = appData.arbitrage_routes || [];
+      const buySelect = document.getElementById('calcBuyExchangeSelect');
+      const sellSelect = document.getElementById('calcSellExchangeSelect');
+      
+      const exchanges = Array.from(new Set(routes.map(r => r.buy_exchange)));
+      
+      const currBuy = buySelect.value;
+      const currSell = sellSelect.value;
+
+      let bHtml = '';
+      let sHtml = '';
+      exchanges.forEach(ex => {
+        bHtml += `<option value="${ex}">${ex}</option>`;
+        sHtml += `<option value="${ex}">${ex}</option>`;
+      });
+
+      if (buySelect.children.length === 0) {
+        buySelect.innerHTML = bHtml;
+        sellSelect.innerHTML = sHtml;
+        if (exchanges.length > 1) {
+          buySelect.selectedIndex = 0;
+          sellSelect.selectedIndex = 1;
+        }
+      }
+      runCalculator();
+    }
+
+    function setCalcCapital(val) {
+      document.getElementById('calcCapitalInput').value = val;
+      runCalculator();
+    }
+
+    function populateCalculator(asset, buySlug, sellSlug) {
+      const calcTabBtn = document.querySelector('[data-tab="tab-calculator"]');
+      if (calcTabBtn) calcTabBtn.click();
+
+      document.getElementById('calcAssetSelect').value = asset;
+      
+      const routes = appData.arbitrage_routes || [];
+      const matched = routes.find(r => r.asset === asset && r.buy_slug === buySlug && r.sell_slug === sellSlug);
+      if (matched) {
+        document.getElementById('calcBuyExchangeSelect').value = matched.buy_exchange;
+        document.getElementById('calcSellExchangeSelect').value = matched.sell_exchange;
+      }
+      runCalculator();
+    }
+
+    function runCalculator() {
+      if (!appData || !appData.arbitrage_routes) return;
+
+      const capital = parseFloat(document.getElementById('calcCapitalInput').value) || 50000000;
+      const asset = document.getElementById('calcAssetSelect').value;
+      const buyEx = document.getElementById('calcBuyExchangeSelect').value;
+      const sellEx = document.getElementById('calcSellExchangeSelect').value;
+
+      const routes = appData.arbitrage_routes;
+      const r = routes.find(x => x.asset === asset && x.buy_exchange === buyEx && x.sell_exchange === sellEx);
+
+      if (!r) {
+        document.getElementById('calcResBuyPrice').textContent = '--';
+        document.getElementById('calcResSellPrice').textContent = '--';
+        document.getElementById('calcResTotalFees').textContent = '--';
+        document.getElementById('calcResFinalAmount').textContent = '--';
+        document.getElementById('calcResNetProfit').textContent = 'مسیر نامعتبر';
+        document.getElementById('calcResNetProfit').className = 'res-val loss';
+        document.getElementById('calcResNetRoi').textContent = '--';
+        return;
+      }
+
+      document.getElementById('calcResBuyPrice').textContent = Number(r.buy_price).toLocaleString('fa-IR') + ' تومان';
+      document.getElementById('calcResSellPrice').textContent = Number(r.sell_price).toLocaleString('fa-IR') + ' تومان';
+
+      // Financial formulas
+      const buyFee = capital * (r.buy_fee_pct / 100);
+      const capitalAfterBuy = capital - buyFee;
+      const assetBought = capitalAfterBuy / r.buy_price;
+
+      const netFeeAsset = asset === 'USDT' ? 1.0 : (asset === 'BTC' ? 0.0001 : 0.001);
+      const assetTransferred = Math.max(0, assetBought - netFeeAsset);
+      const transferFeeToman = netFeeAsset * r.buy_price;
+
+      const grossSell = assetTransferred * r.sell_price;
+      const sellFee = grossSell * (r.sell_fee_pct / 100);
+      const finalAmount = grossSell - sellFee;
+
+      const totalFees = buyFee + transferFeeToman + sellFee;
+      const netProfit = finalAmount - capital;
+      const roi = (netProfit / capital) * 100;
+
+      document.getElementById('calcResTotalFees').textContent = Number(Math.round(totalFees)).toLocaleString('fa-IR') + ' تومان';
+      document.getElementById('calcResFinalAmount').textContent = Number(Math.round(finalAmount)).toLocaleString('fa-IR') + ' تومان';
+      
+      const profitEl = document.getElementById('calcResNetProfit');
+      profitEl.textContent = (netProfit > 0 ? '+' : '') + Number(Math.round(netProfit)).toLocaleString('fa-IR') + ' تومان';
+      profitEl.className = 'res-val ' + (netProfit > 0 ? 'profit' : 'loss');
+
+      const roiEl = document.getElementById('calcResNetRoi');
+      roiEl.textContent = (roi > 0 ? '+' : '') + roi.toFixed(2) + '٪ بازدهی';
+      roiEl.style.color = roi > 0 ? '#34d399' : '#f87171';
+    }
+
+    document.getElementById('calcCapitalInput').addEventListener('input', runCalculator);
+    document.getElementById('calcAssetSelect').addEventListener('change', runCalculator);
+    document.getElementById('calcBuyExchangeSelect').addEventListener('change', runCalculator);
+    document.getElementById('calcSellExchangeSelect').addEventListener('change', runCalculator);
+
+    // --- REFRESH COUNTDOWN ---
+    function startCountdown() {
+      countdown = 10;
+      clearInterval(countdownTimer);
+      countdownTimer = setInterval(() => {
+        countdown--;
+        if (countdown <= 0) {
+          countdown = 10;
+          fetchSummary();
+        }
+        document.getElementById('refreshCounter').textContent = countdown + 's';
+      }, 1000);
+    }
+
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      fetchSummary();
+      startCountdown();
+    });
+
+    // --- INITIAL LOAD ---
+    fetchSummary();
+    startCountdown();
+  </script>
+</body>
+</html>
