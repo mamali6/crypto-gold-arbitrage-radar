@@ -507,22 +507,37 @@ def compute_all_data():
         ]
     }
 
-def get_cached_payload():
-    now = time.time()
-    with cache["lock"]:
-        if cache["data"] and (now - cache["last_update"] < CACHE_TTL):
-            return cache["data"]
-        
-        # Refresh
+def background_updater():
+    # Initial warm up
+    try:
+        data = compute_all_data()
+        with cache["lock"]:
+            cache["data"] = data
+            cache["last_update"] = time.time()
+        print("Initial market data computed!")
+    except Exception as e:
+        print("Initial warmup error:", e)
+
+    while True:
+        time.sleep(5)
         try:
-            payload = compute_all_data()
-            cache["data"] = payload
-            cache["last_update"] = now
-            return payload
+            data = compute_all_data()
+            with cache["lock"]:
+                cache["data"] = data
+                cache["last_update"] = time.time()
         except Exception as e:
-            if cache["data"]:
-                return cache["data"]
-            raise e
+            pass
+
+def get_cached_payload():
+    with cache["lock"]:
+        if cache["data"]:
+            return cache["data"]
+    # Fallback if first request comes before thread finishes
+    payload = compute_all_data()
+    with cache["lock"]:
+        cache["data"] = payload
+        cache["last_update"] = time.time()
+    return payload
 
 # --- HTTP HANDLER ---
 
@@ -640,6 +655,8 @@ class ArbitrageHandler(http.server.BaseHTTPRequestHandler):
         pass
 
 if __name__ == "__main__":
+    t = threading.Thread(target=background_updater, daemon=True)
+    t.start()
     server = http.server.ThreadingHTTPServer(("0.0.0.0", PORT), ArbitrageHandler)
     print(f"Arbitrage Server listening on http://0.0.0.0:{PORT}")
     server.serve_forever()
