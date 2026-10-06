@@ -553,6 +553,162 @@
       box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
     }
 
+    
+    /* Triangular Loop Card Styles */
+    .tri-loops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .tri-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .tri-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.18);
+      background: var(--bg-card-hover);
+    }
+    .tri-card.tier-golden {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(18, 26, 36, 1) 100%);
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.12);
+    }
+    .tri-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tri-exchange-pill {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 3px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .tri-coin-badge {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+
+    /* 3-Step Visual Loop Flow */
+    .tri-steps-flow {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      padding: 10px;
+      position: relative;
+    }
+    .tri-step-box {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      text-align: center;
+    }
+    .tri-step-num {
+      font-size: 9.5px;
+      color: var(--text-dim);
+      font-weight: 700;
+    }
+    .tri-step-action {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .tri-step-rate {
+      font-size: 10.5px;
+      word-break: break-word;
+      font-weight: 700;
+      color: #38bdf8;
+      font-feature-settings: "tnum";
+    }
+
+    /* Return & ROI Row */
+    .tri-return-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 10px;
+    }
+    .tri-metric-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .tri-metric-label { font-size: 10px; color: var(--text-dim); }
+    .tri-metric-val { font-size: 13px; font-weight: 800; font-feature-settings: "tnum"; }
+
+    /* Spread History Chart Box */
+    .chart-container-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .chart-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .chart-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chart-title { font-size: 14px; font-weight: 800; color: #fff; }
+    .chart-stats-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .chart-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .chart-pill-label { color: var(--text-dim); font-size: 10px; }
+    .chart-pill-val { font-weight: 700; color: #fff; font-feature-settings: "tnum"; font-size: 11.5px; }
+
+    .svg-chart-wrap {
+      width: 100%;
+      height: 200px;
+      position: relative;
+    }
+    .svg-chart-wrap svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
     /* --- TETHER RADAR CARDS --- */
     .tether-cards-grid {
       display: grid;
@@ -1078,8 +1234,12 @@
         <span>⚡ فرصت‌های آربیتراژ</span>
         <span class="tab-badge" id="badgeArbCount">۰</span>
       </button>
+      <button class="tab-btn" data-tab="tab-triangular">
+        <span>🔄 آربیتراژ مثلثی</span>
+        <span class="tab-badge" id="badgeTriCount">۱۷ لوپ</span>
+      </button>
       <button class="tab-btn" data-tab="tab-tether">
-        <span>🪙 دیده‌بان تتر</span>
+        <span>🪙 دیده‌بان تتر و عمق اردرها</span>
         <span class="tab-badge">۵ صرافی</span>
       </button>
       <button class="tab-btn" data-tab="tab-gold">
@@ -1155,12 +1315,75 @@
 
     </div>
 
+    <!-- ==================== TAB 1.5: TRIANGULAR ARBITRAGE ==================== -->
+    <div class="tab-pane" id="tab-triangular">
+      
+      <div class="table-control-bar">
+        <div style="display: flex; flex-direction: column; gap: 3px;">
+          <span class="table-meta-text" style="font-weight: 700; color: #fff;">
+            🔄 اسکنر آربیتراژ مثلثی درون‌صرافی (Triangular Arbitrage Scanner)
+          </span>
+          <span style="font-size: 11px; color: var(--text-dim);">
+            معاملات سه‌گانه برق‌آسا درون یک صرافی (نوبیتکس / والکس) • بدون نیاز به انتقال بین صرافی و با صفر کارمزد شبکه بلاک‌چین!
+          </span>
+        </div>
+        <div class="filter-pills-group">
+          <span style="font-size: 11px; color: var(--text-dim);">صرافی:</span>
+          <button class="filter-chip active" data-filter-tri-ex="ALL">همه صرافی‌ها</button>
+          <button class="filter-chip" data-filter-tri-ex="nobitex">نوبیتکس</button>
+          <button class="filter-chip" data-filter-tri-ex="wallex">والکس</button>
+        </div>
+      </div>
+
+      <!-- Triangular Loops Grid -->
+      <div class="tri-loops-grid" id="triLoopsContainer">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
     <!-- ==================== TAB 2: TETHER BOARD ==================== -->
     <div class="tab-pane" id="tab-tether">
       
       <div class="table-control-bar">
         <span class="table-meta-text">💡 بهترین استراتژی خرید و فروش تتر (USDT) در لحظه کنونی:</span>
         <span style="font-size: 11.5px; color: var(--accent-green); font-weight: 700;" id="tetherBestSummary"></span>
+      </div>
+
+      <!-- LIVE SPREAD HISTORY CHART BOX -->
+      <div class="chart-container-card">
+        <div class="chart-header-row">
+          <div class="chart-title-wrap">
+            <span style="font-size: 18px;">📊</span>
+            <div>
+              <div class="chart-title">نمودار ۲۴ ساعته نوسان اسپرد تتر و سطوح طلایی آربیتراژ</div>
+              <div style="font-size: 11px; color: var(--text-dim);" id="chartSpreadStatusText">در حال ترسیم منحنی نوسان...</div>
+            </div>
+          </div>
+          <div class="chart-stats-pills">
+            <div class="chart-pill">
+              <span class="chart-pill-label">اسپرد لحظه‌ای:</span>
+              <span class="chart-pill-val" id="chartStatCurrent" style="color: #34d399;">--</span>
+            </div>
+            <div class="chart-pill">
+              <span class="chart-pill-label">سقف ۲۴h (Peak):</span>
+              <span class="chart-pill-val" id="chartStatPeak" style="color: #fbbf24;">--</span>
+            </div>
+            <div class="chart-pill">
+              <span class="chart-pill-label">کف ۲۴h (Floor):</span>
+              <span class="chart-pill-val" id="chartStatFloor">--</span>
+            </div>
+            <div class="chart-pill">
+              <span class="chart-pill-label">میانگین:</span>
+              <span class="chart-pill-val" id="chartStatAvg">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SVG Canvas Area -->
+        <div class="svg-chart-wrap" id="spreadSvgContainer">
+          <!-- Rendered via JS -->
+        </div>
       </div>
 
       <!-- Tether Exchange Cards -->
@@ -1397,6 +1620,210 @@
       });
     });
 
+    
+    // --- TRIANGULAR ARBITRAGE RENDERING ---
+    let activeTriExFilter = 'ALL';
+
+    document.querySelectorAll('[data-filter-tri-ex]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-filter-tri-ex]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTriExFilter = btn.getAttribute('data-filter-tri-ex');
+        renderTriangularLoops();
+      });
+    });
+
+    function renderTriangularLoops() {
+      const loops = appData.triangular_loops || [];
+      const container = document.getElementById('triLoopsContainer');
+      const badge = document.getElementById('badgeTriCount');
+      if (badge) badge.textContent = loops.length.toLocaleString('fa-IR') + ' لوپ';
+
+      let filtered = loops;
+      if (activeTriExFilter !== 'ALL') {
+        filtered = loops.filter(l => l.slug === activeTriExFilter);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-subtle); grid-column: 1 / -1;">
+            <div style="font-size: 32px; margin-bottom: 8px;">🔄</div>
+            <div style="font-size: 14px; font-weight: 700; color: #fff;">هیچ لوپ فعالی در صرافی انتخابی یافت نشد</div>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(l => {
+        const isGolden = l.tier === 'golden';
+        const cardClass = isGolden ? 'tier-golden' : '';
+        const grossColor = l.gross_pct > 0 ? 'var(--accent-green)' : 'var(--text-muted)';
+        const netColor = l.net_profit > 0 ? '#34d399' : '#f87171';
+
+        const s1 = l.steps[0] || {};
+        const s2 = l.steps[1] || {};
+        const s3 = l.steps[2] || {};
+
+        html += `
+          <div class="tri-card ${cardClass}">
+            <div class="tri-card-header">
+              <span class="tri-exchange-pill">🏛️ ${l.exchange}</span>
+              <span class="tri-coin-badge">${l.coin}</span>
+              <span style="font-size: 11px; font-weight: 700; color: ${isGolden ? '#34d399' : 'var(--text-dim)'};">
+                ${isGolden ? '🚀 لوپ طلایی سودآور' : 'اسکن سه‌گانه'}
+              </span>
+            </div>
+
+            <div style="font-size: 12px; font-weight: 700; color: #fff; text-align: center; margin-bottom: 2px;">
+              ${l.direction_label}
+            </div>
+
+            <!-- 3-Step Flow -->
+            <div class="tri-steps-flow">
+              <div class="tri-step-box">
+                <span class="tri-step-num">گام اول</span>
+                <span class="tri-step-action">${s1.action || '--'}</span>
+                <span class="tri-step-rate">${s1.rate || '--'}</span>
+              </div>
+              <div class="tri-step-box">
+                <span class="tri-step-num">گام دوم</span>
+                <span class="tri-step-action">${s2.action || '--'}</span>
+                <span class="tri-step-rate">${s2.rate || '--'}</span>
+              </div>
+              <div class="tri-step-box">
+                <span class="tri-step-num">گام سوم</span>
+                <span class="tri-step-action">${s3.action || '--'}</span>
+                <span class="tri-step-rate">${s3.rate || '--'}</span>
+              </div>
+            </div>
+
+            <!-- Financial Returns -->
+            <div class="tri-return-row">
+              <div class="tri-metric-group">
+                <span class="tri-metric-label">بازده ناخالص چرخه:</span>
+                <span class="tri-metric-val" style="color: ${grossColor};"><bdi dir="ltr">${l.gross_pct > 0 ? '+' : ''}${l.gross_pct}%</bdi></span>
+              </div>
+              <div class="tri-metric-group">
+                <span class="tri-metric-label">کارمزد ۳ معامله:</span>
+                <span class="tri-metric-val" style="color: #f87171;"><bdi dir="ltr">-0.75%</bdi></span>
+              </div>
+              <div class="tri-metric-group" style="text-align: left;">
+                <span class="tri-metric-label">سود خالص (۵۰M ت):</span>
+                <span class="tri-metric-val" style="color: ${netColor};">${l.net_profit > 0 ? '+' : ''}${Number(l.net_profit).toLocaleString('fa-IR')} ت <span style="font-size: 11px;"><bdi dir="ltr">(${l.net_roi > 0 ? '+' : ''}${l.net_roi}%)</bdi></span></span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // --- SPREAD HISTORY SVG CHART RENDERING ---
+    function renderSpreadHistoryChart() {
+      const sa = appData.spread_analytics;
+      if (!sa || !sa.points || sa.points.length === 0) return;
+
+      document.getElementById('chartStatCurrent').textContent = '+' + sa.current_spread + '٪';
+      document.getElementById('chartStatPeak').textContent = '+' + sa.peak_spread + '٪';
+      document.getElementById('chartStatFloor').textContent = '+' + sa.floor_spread + '٪';
+      document.getElementById('chartStatAvg').textContent = '+' + sa.avg_spread + '٪';
+
+      const statusEl = document.getElementById('chartSpreadStatusText');
+      if (sa.current_spread >= sa.avg_spread) {
+        statusEl.innerHTML = '<span style="color: #34d399; font-weight: 700;">🚀 وضعیت: در سقف اسپرد روزانه و فاز طلایی آربیتراژ (بهترین زمان ورود)</span>';
+      } else {
+        statusEl.innerHTML = '<span style="color: #fbbf24; font-weight: 700;">⏳ وضعیت: در فاز انقباض و فشرده‌سازی اسپرد تتر</span>';
+      }
+
+      const points = sa.points;
+      const width = 1000;
+      const height = 200;
+      const padTop = 25;
+      const padBottom = 35;
+      const padLeft = 40;
+      const padRight = 40;
+
+      const chartW = width - padLeft - padRight;
+      const chartH = height - padTop - padBottom;
+
+      const minVal = Math.max(0.05, sa.floor_spread * 0.85);
+      const maxVal = Math.max(minVal + 0.2, sa.peak_spread * 1.15);
+
+      const coords = points.map((p, i) => {
+        const x = padLeft + (i / (points.length - 1)) * chartW;
+        const normY = (p.spread_pct - minVal) / (maxVal - minVal);
+        const y = padTop + (1.0 - normY) * chartH;
+        return { x, y, ...p };
+      });
+
+      // Build path line
+      let pathD = `M ${coords[0].x} ${coords[0].y}`;
+      for (let i = 1; i < coords.length; i++) {
+        // Smooth line
+        const prev = coords[i - 1];
+        const curr = coords[i];
+        const cpX = (prev.x + curr.x) / 2;
+        pathD += ` C ${cpX} ${prev.y}, ${cpX} ${curr.y}, ${curr.x} ${curr.y}`;
+      }
+
+      // Closed polygon for area gradient
+      const lastX = coords[coords.length - 1].x;
+      const firstX = coords[0].x;
+      const bottomY = padTop + chartH;
+      const areaD = `${pathD} L ${lastX} ${bottomY} L ${firstX} ${bottomY} Z`;
+
+      // Reference line for Avg
+      const avgY = padTop + (1.0 - ((sa.avg_spread - minVal) / (maxVal - minVal))) * chartH;
+
+      let timeLabels = '';
+      for (let i = 0; i < coords.length; i += 4) {
+        const pt = coords[i];
+        timeLabels += `<text x="${pt.x}" y="${height - 10}" fill="#64748b" font-size="10.5" text-anchor="middle" font-family="Vazirmatn">${pt.hour}</text>`;
+      }
+      // Last label
+      const lastPt = coords[coords.length - 1];
+      timeLabels += `<text x="${lastPt.x}" y="${height - 10}" fill="#10b981" font-size="10.5" font-weight="700" text-anchor="middle" font-family="Vazirmatn">اکنون</text>`;
+
+      const svgHtml = `
+        <svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="spreadAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#10b981" stop-opacity="0.3" />
+              <stop offset="60%" stop-color="#06b6d4" stop-opacity="0.08" />
+              <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.0" />
+            </linearGradient>
+            <filter id="neonSpreadGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#10b981" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+
+          <!-- Dotted reference line for Average -->
+          <line x1="${padLeft}" y1="${avgY}" x2="${lastX}" y2="${avgY}" stroke="rgba(245, 158, 11, 0.4)" stroke-dasharray="4,4" stroke-width="1.2" />
+          <text x="${lastX - 5}" y="${avgY - 6}" fill="#f59e0b" font-size="9.5" font-weight="700" text-anchor="end" font-family="Vazirmatn">میانگین: ${sa.avg_spread}٪</text>
+
+          <!-- Gradient Area -->
+          <path d="${areaD}" fill="url(#spreadAreaGrad)" />
+
+          <!-- Main Spread Stroke -->
+          <path d="${pathD}" fill="none" stroke="#10b981" stroke-width="2.5" filter="url(#neonSpreadGlow)" />
+
+          <!-- Points -->
+          ${coords.map((pt, idx) => `
+            <circle cx="${pt.x}" cy="${pt.y}" r="${idx === coords.length - 1 ? '4' : '2.5'}" fill="${idx === coords.length - 1 ? '#fff' : '#10b981'}" stroke="#06090e" stroke-width="1.5">
+              <title>${pt.hour}: اسپرد +${pt.spread_pct}٪ (${Number(pt.diff_toman).toLocaleString('fa-IR')} ت)</title>
+            </circle>
+          `).join('')}
+
+          <!-- Time Labels -->
+          ${timeLabels}
+        </svg>
+      `;
+
+      document.getElementById('spreadSvgContainer').innerHTML = svgHtml;
+    }
+
     // --- DATA FETCHER ---
     async function fetchSummary() {
       try {
@@ -1438,8 +1865,12 @@
       // 2. Tab Arbitrage
       renderArbitrageRoutes();
 
-      // 3. Tab Tether
+      // 2.5 Tab Triangular
+      renderTriangularLoops();
+
+      // 3. Tab Tether & Spread Chart
       renderTetherBoard();
+      renderSpreadHistoryChart();
 
       // 4. Tab Gold
       renderGoldBubbles();
@@ -1595,10 +2026,12 @@
               <div class="price-sub-col">
                 <span class="p-label">قیمت خرید شما (Ask):</span>
                 <span class="p-val buy">${b.ask ? Number(b.ask).toLocaleString('fa-IR') : '--'} <span style="font-size: 11px; color: var(--text-dim);">تومان</span></span>
+                <span style="font-size: 10px; color: #38bdf8; margin-top: 2px;">عمق عرضه: ${b.ask_vol ? Number(b.ask_vol).toLocaleString('fa-IR') + ' USDT' : 'نامحدود OTC'}</span>
               </div>
               <div class="price-sub-col" style="text-align: left;">
                 <span class="p-label">قیمت فروش شما (Bid):</span>
                 <span class="p-val sell">${b.bid ? Number(b.bid).toLocaleString('fa-IR') : '--'} <span style="font-size: 11px; color: var(--text-dim);">تومان</span></span>
+                <span style="font-size: 10px; color: #34d399; margin-top: 2px;">عمق تقاضا: ${b.bid_vol ? Number(b.bid_vol).toLocaleString('fa-IR') + ' USDT' : 'نامحدود OTC'}</span>
               </div>
             </div>
 
